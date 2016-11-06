@@ -1,0 +1,19 @@
+---
+title: "Week 1: Practice Quiz"
+output: html_notebook
+---
+This is Question 5, the others did not require computing:
+
+You are told that either a coin has either a strong tails bias (p = 0.2), a weak tails bias (p = 0.4 ), no bias (p = 0.5), a weak heads bias ( p = 0.6), or a strong heads bias ( p = 0.8). You assign a prior probability of 1/2 that the coin is fair and distribute the remaining 1/2 prior probability equally over the other four possible scenarios. You flip the coin three times and it comes up heads all three times. What is the posterior probability that the coin is biased towards heads?
+
+```{r}
+models <- c(.2,.4,.5,.6,.8)
+priors <- c(.125,.125,.5,.125,.125)
+likelihoods <- dbinom(3,3,models)
+posteriors <- likelihoods*priors/sum(likelihoods*priors)
+cbind(models,posteriors)
+
+
+```
+
+The probability that it is biased towards heads is either p = 0.6 or p = 0.8. So we have approximately 0.17 + 0.39 = 0.56.
