@@ -1,0 +1,54 @@
+---
+title: "Practice Quizzes"
+output: html_notebook
+---
+
+## Week 1
+This is Question 5, the others did not require computing:
+
+You are told that either a coin has either a strong tails bias (p = 0.2), a weak tails bias (p = 0.4 ), no bias (p = 0.5), a weak heads bias ( p = 0.6), or a strong heads bias ( p = 0.8). You assign a prior probability of 1/2 that the coin is fair and distribute the remaining 1/2 prior probability equally over the other four possible scenarios. You flip the coin three times and it comes up heads all three times. What is the posterior probability that the coin is biased towards heads?
+
+```{r}
+models <- c(.2,.4,.5,.6,.8)
+priors <- c(.125,.125,.5,.125,.125)
+likelihoods <- dbinom(3,3,models)
+posteriors <- likelihoods*priors/sum(likelihoods*priors)
+cbind(models,posteriors)
+
+
+```
+
+The probability that it is biased towards heads is either p = 0.6 or p = 0.8. So we have approximately 0.17 + 0.39 = 0.56.
+
+## Week 2
+
+This is question 4.
+
+Suppose that you sample 24 M&Ms from a bag and find that 3 of them are yellow. Assuming that you place a uniform Beta(1,1) prior on
+the proportion of yellow M&Ms p, what is the posterior probability that p < 0.2 ?
+
+So we have 3 successes, 21 failures, so we get a beta (1+3, 1+21) distribution. 
+
+```{r}
+pbeta(0.2,4,22)
+```
+
+This is question 5.
+
+Suppose you are given a coin and told that the coin is either biased towards heads (p = 0.6) or biased towards tails (p = 0.4). Since you have no prior knowledge about the bias of the coin, you place a prior probability of 0.5 on the outcome that the coin is biased towards heads. You flip the coin twice and it comes up tails both times. What is the posterior probability that your next two flips will be heads?
+- posterior ~ prior * likelihood
+- prior = 0.5
+- under the prior assumption that is biased towards heads (instead of 50/50 coin it's a 60/40 coin), the probability that it would come up tails twice in a row is 0.4 * 0.4 = 0.16
+- posterior that is biased towards heads is 0.5 * 0.16 = 0.08.
+- The next two flips being heads is 0.08 * 0.4 * 0.4 = 
+```{r}
+0.08 * 0.4 * 0.4
+```
+
+This is not a multiple choice option! I need to rethink it.
+
+
+
+
+
+
