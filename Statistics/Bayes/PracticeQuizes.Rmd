@@ -39,16 +39,17 @@ Suppose you are given a coin and told that the coin is either biased towards hea
 - posterior ~ prior * likelihood
 - prior = 0.5
 - under the prior assumption that is biased towards heads (instead of 50/50 coin it's a 60/40 coin), the probability that it would come up tails twice in a row is 0.4 * 0.4 = 0.16
-- posterior that is biased towards heads is 0.5 * 0.16 = 0.08.
+- posterior that is biased towards heads is 0.5 * 0.16 / (0.5  * 0.16 + (0.5 * (0.6 * 0.6))
 - The next two flips being heads is 0.08 * 0.4 * 0.4 = 
 ```{r}
-0.08 * 0.4 * 0.4
+0.5*0.16/ (0.5 * 0.16 + 0.5 * 0.36)
 ```
 
-This is not a multiple choice option! I need to rethink it.
-
-
-
+Now the chance that we get two heads is
+0.308... * 0.6 * 0.6 
+```{r}
+.308 * 0.6 * 0.6
+```
 
 
 
