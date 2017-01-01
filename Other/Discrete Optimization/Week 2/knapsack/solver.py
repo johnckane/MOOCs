@@ -8,37 +8,46 @@ def solve_it(input_data):
     # Modify this code to run your optimization algorithm
 
     # parse the input
-    lines = input_data.split('\n')
+    lines = input_data.split('\n') 
 
-    firstLine = lines[0].split()
-    item_count = int(firstLine[0])
-    capacity = int(firstLine[1])
+    firstLine = lines[0].split() 
+    num_items = int(firstLine[0]) 
+    capacity = int(firstLine[1]) 
 
-    items = []
+    items = range(num_items)
+    selected = [0] * num_items 
 
-    for i in range(1, item_count+1):
-        line = lines[i]
-        parts = line.split()
-        items.append(Item(i-1, int(parts[0]), int(parts[1])))
+    all_lines = list()
+    for i in range(1,num_items+1):
+        all_lines.append([float(lines[i].split()[0]),
+                          float(lines[i].split()[1]),
+                          float(lines[i].split()[0])/float(lines[i].split()[1]),
+                          i
+                         ]
+                        )
+                        
+    all_lines.sort(key= lambda items: (items[2],items[0]), reverse  = True)
 
-    # a trivial greedy algorithm for filling the knapsack
-    # it takes items in-order until the knapsack is full
-    value = 0
     weight = 0
-    taken = [0]*len(items)
-
-    for item in items:
-        if weight + item.weight <= capacity:
-            taken[item.index] = 1
-            value += item.value
-            weight += item.weight
-    
+    value = 0
+    placeholder = 0
+    while capacity > 0 :
+        if (all_lines[placeholder][1]) <= capacity:
+            selected[all_lines[placeholder][3]-1] = 1
+            weight += all_lines[placeholder][1]
+            value += all_lines[placeholder][0]
+            capacity -= all_lines[placeholder][1]
+        
+        placeholder += 1
+        
+        if placeholder > (num_items - 1):
+            break
+       
     # prepare the solution in the specified output format
-    output_data = str(value) + ' ' + str(0) + '\n'
-    output_data += ' '.join(map(str, taken))
+    output_data = str(int(value)) + ' ' + str(0) + '\n'
+    output_data += ' '.join(map(str, selected))
     return output_data
-
-
+    
 if __name__ == '__main__':
     import sys
     if len(sys.argv) > 1:
@@ -48,4 +57,6 @@ if __name__ == '__main__':
         print(solve_it(input_data))
     else:
         print('This test requires an input file.  Please select one from the data directory. (i.e. python solver.py ./data/ks_4_0)')
+
+
 
