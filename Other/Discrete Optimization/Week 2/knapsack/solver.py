@@ -27,7 +27,7 @@ def solve_it(input_data):
                         )
                         
     all_lines.sort(key= lambda items: (items[2],items[0]), reverse  = True)
-
+#    all_lines.sort(key = lambda items: (items[1]), reverse = False)
     weight = 0
     value = 0
     placeholder = 0
